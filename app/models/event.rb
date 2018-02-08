@@ -3,5 +3,5 @@ class Event < ApplicationRecord
   has_and_belongs_to_many :attendees, class_name: 'User'
 
   scope :current, -> {where("date > ?", DateTime.now)}
-  scope :passed, -> {where("date < ?", DateTime.now)}
+  scope :past, -> {where("date < ?", DateTime.now)}
 end
