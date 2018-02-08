@@ -5,7 +5,7 @@
 <div class="center jumbotron">
   <h3>Actuels</h3>
   <br>
-  <% if !@events.any? %>
+  <% if !@events.current.any? %>
     <div>Aucun évènement</div>
   <% else %>
     <%= render 'layouts/current_events' %>
@@ -15,7 +15,7 @@
 <div class="center jumbotron">
   <h3>Passés</h3>
   <br>
-  <% if !@events.any? %>
+  <% if !@events.past.any? %>
     <div>Aucun évènement</div>
   <% else %>
     <%= render 'layouts/past_events' %>

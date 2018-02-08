@@ -40,6 +40,23 @@ table, th, td {
 
 .table-hover {
   margin: auto;
+  td {
+    width: 25%;
+  }
+}
+
+.index{
+  td {
+    width: 25%;
+  }
+}
+
+.event-show{
+  margin: auto;
+  /*border: 1px solid black;*/
+  td {
+    width: 50%;
+  }
 }
 
 section {

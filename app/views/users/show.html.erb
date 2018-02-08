@@ -2,7 +2,13 @@
 <h1><%= current_user.name %></h1>
 <h2><%= current_user.email %></h2>
 <div class="center jumbotron">
-  <h2>Crées</h2>
+  <h2>Créés</h2>
+
+  <% if !current_user.created_events.any? %>
+    <div>Aucun évènement</div>
+  <% else %>
+
+
   <table class="table-hover">
     <thead>
       <tr>
@@ -16,18 +22,28 @@
       <% current_user.created_events.each do |event| %>
         <tr>
           <td><%= event.description%></td>
-          <td><%= event.date.strftime("%d/%b/%Y") %></td>
+          <td><%= event.date.strftime("%d-%b-%Y") %></td>
           <td><%= event.place %></td>
+          <td>
+            <%= link_to 'Show', event, :class=>"btn btn-sm btn-info", :method=>:get%>
+            <%= link_to 'Edit', edit_event_path(event), :class=>"btn btn-sm btn-warning", :method=>:get%>
+            <%= link_to 'Delete', current_user, :class=>"btn btn-sm btn-danger", :method=>:delete%>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <% end %>
 </div>
 
 <br />
 
 <div class="center jumbotron">
   <h2>Participation</h2>
+
+  <% if !current_user.attended_events.any? %>
+    <div>Aucun évènement</div>
+  <% else %>
   <table class="table-hover">
     <thead>
       <tr>
@@ -41,16 +57,21 @@
       <% current_user.attended_events.each do |event| %>
         <tr>
           <td><%= event.description%></td>
-          <td><%= event.date.strftime("%d/%b/%Y") %></td>
+          <td><%= event.date.strftime("%d-%b-%Y") %></td>
           <td><%= event.place %></td>
+          <td><%= link_to 'Show', event, :class=>"btn btn-sm btn-info", :method=>:get%></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <% end %>
 </div>
 
 <div class="center jumbotron">
   <h2>Évènements passés</h2>
+  <% if !current_user.attended_events.past.any? %>
+    <div>Aucun évènement</div>
+  <% else %>
   <table class="table-hover">
     <thead>
       <tr>
@@ -61,15 +82,15 @@
     </thead>
 
     <tbody>
-      <% current_user.attended_events.passed.each do |event| %>
+      <% current_user.attended_events.past.each do |event| %>
         <tr>
           <td><%= event.description%></td>
           <td><%= event.date.strftime("%d/%b/%Y") %></td>
           <td><%= event.place %></td>
+          <td><%= link_to 'Show', event, :class=>"btn btn-sm btn-info", :method=>:get%></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <% end %>
 </div>
-
-<div style="text-align:center;"><%= link_to "Edite tes infos", edit_user_path(current_user), class: "btn btn-lg btn-warning" %></div>
