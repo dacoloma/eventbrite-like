@@ -1,2 +1,75 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% provide(:title, current_user.name) %>
+<h1><%= current_user.name %></h1>
+<h2><%= current_user.email %></h2>
+<div class="center jumbotron">
+  <h2>Crées</h2>
+  <table class="table-hover">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Date</th>
+        <th>Lieu</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% current_user.created_events.each do |event| %>
+        <tr>
+          <td><%= event.description%></td>
+          <td><%= event.date.strftime("%d/%b/%Y") %></td>
+          <td><%= event.place %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br />
+
+<div class="center jumbotron">
+  <h2>Participation</h2>
+  <table class="table-hover">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Date</th>
+        <th>Lieu</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% current_user.attended_events.each do |event| %>
+        <tr>
+          <td><%= event.description%></td>
+          <td><%= event.date.strftime("%d/%b/%Y") %></td>
+          <td><%= event.place %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="center jumbotron">
+  <h2>Évènements passés</h2>
+  <table class="table-hover">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Date</th>
+        <th>Lieu</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% current_user.attended_events.passed.each do |event| %>
+        <tr>
+          <td><%= event.description%></td>
+          <td><%= event.date.strftime("%d/%b/%Y") %></td>
+          <td><%= event.place %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align:center;"><%= link_to "Edite tes infos", edit_user_path(current_user), class: "btn btn-lg btn-warning" %></div>

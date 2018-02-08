@@ -1,6 +1,31 @@
+<h1>Welcome !</h1>
+<h2>Tu veux créer un évènement ?</h2>
+<%= render 'layouts/new_event' %>
+<br>
 <div class="center jumbotron">
-  <h1>Welcome !</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Lieu</th>
+        <th>Créateur</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-  <h2>Tu veux créer un évènement ?</h2>
-  <%= render 'layouts/new_event' %>
+    <tbody>
+      <% if !@events.nil? %>
+        <% @events.each do |event| %>
+          <tr>
+            <td><%= event.date %></td>
+            <td><%= event.place %></td>
+            <td><%= event.creator %></td>
+            <td><%= button_to 'Show', event, :class=>"btn btn-sm btn-outline-info", :method=>:get%></td>
+            <td><%= button_to 'Edit', edit_event_path(event), :class=>"btn btn-sm btn-outline-warning", :method=>:get%></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
 </div>

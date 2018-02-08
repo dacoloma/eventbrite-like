@@ -16,15 +16,30 @@ $gray-medium-light: #eaeaea;
 /* universal */
 
 body {
-  padding-top: 150px;
+  padding-top: 100px;
+}
+
+table{
+  width: 90%
 }
 
 table, th, td {
     text-align: center;
 }
 
-td{
-  width: 50%;
+.button_list_table {
+  list-style: none;
+  padding: 0;
+  vertical-align: bottom;
+  li {
+    display: inline;
+    margin-right: 2px;
+    margin-left: 2px;
+  }
+}
+
+.table-hover {
+  margin: auto;
 }
 
 section {

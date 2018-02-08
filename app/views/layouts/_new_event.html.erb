@@ -1,13 +1,13 @@
 <% if logged_in? %>
-  <table style="width:100%">
+  <table style="width:100%;">
     <tr>
       <td>
-        <%= link_to "Créer un nouvel event", '#', class: "btn btn-lg btn-info" %>
+        <%= link_to "Créer un nouvel event", 'new_event', class: "btn btn-lg btn-info" %>
       </td>
     </tr>
   </table>
 <% else %>
-  <table style="width:100%">
+  <table style="width:90%;">
     <tr>
       <th>
         <h3>..mais avant inscris toi !</h3>
@@ -24,7 +24,7 @@
   <table style="width:100%">
     <tr>
       <td>
-        <%= link_to "Créer un nouvel event", '#', class: "btn btn-lg btn-info" %>
+        <%= link_to "Créer un nouvel event", 'login', class: "btn btn-lg btn-info" %>
       </td>
     </tr>
   </table>
