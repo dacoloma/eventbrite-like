@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :subscribe]
+  before_action :set_event, only: [:show, :destroy, :subscribe]
   def index
     @events = Event.all
   end
@@ -20,27 +20,25 @@ class EventsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-    if @event.update(event_params)
-      flash.now[:success] = "Edit with success !"
-    else
-      render 'edit'
-    end
-  end
-
   def show
   end
 
   def subscribe
     @event.attendees << current_user
+    flash.now[:success] = "Participation with success"
     redirect_to root_path
+  end
+
+  def invite
+    @event = Event.find(params[:event_id])
+    @event.attendees << @user
+    flash.now[:success] = "Participation with success"
+    render 'show'
   end
 
   def destroy
     @event.destroy
+    flash.now[:success] = "Delete with success !"
     redirect_to current_user
   end
 

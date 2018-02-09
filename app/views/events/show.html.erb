@@ -1,13 +1,15 @@
 <h1>Event</h1>
 <h2>Organisateur : <%= @event.creator.name %></h2>
 <h2><%= @event.place %></h2>
-<h2><%= @event.date.strftime("%d/%b/%Y") %></h2>
+<h2><%= @event.date.strftime("%d %B %Y") %></h2>
 <div class="center jumbotron">
 
 
   <h3>Liste des participants</h3>
   <br>
-  <div>
+  <% if !@event.attendees.any? %>
+    <div>Aucun participant</div>
+  <% else %>
     <table class="event-show">
       <thead>
         <tr>
@@ -25,8 +27,7 @@
         <% end %>
       </tbody>
     </table>
-  </div>
-<br />
-
+  <% end %>
 </div>
+
 <!--<div style="text-align:center;"><%= link_to "Edite tes infos", edit_user_path(current_user), class: "btn btn-lg btn-warning" %></div>-->

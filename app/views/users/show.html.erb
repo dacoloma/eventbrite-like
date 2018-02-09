@@ -6,9 +6,8 @@
 
   <% if !current_user.created_events.any? %>
     <div>Aucun évènement</div>
+    <br>
   <% else %>
-
-
   <table class="table-hover">
     <thead>
       <tr>
@@ -25,8 +24,8 @@
           <td><%= event.date.strftime("%d-%b-%Y") %></td>
           <td><%= event.place %></td>
           <td>
+            <%= link_to 'Invite', event_users_path(event), :class=>"btn btn-sm btn-success", :method=>:get%>
             <%= link_to 'Show', event, :class=>"btn btn-sm btn-info", :method=>:get%>
-            <%= link_to 'Edit', edit_event_path(event), :class=>"btn btn-sm btn-warning", :method=>:get%>
             <%= link_to 'Delete', event, :class=>"btn btn-sm btn-danger", :method=>:delete%>
           </td>
         </tr>
@@ -34,6 +33,10 @@
     </tbody>
   </table>
   <% end %>
+  <br>
+  <div>
+    <%= link_to "Créer un nouvel event", new_event_path, class: "btn btn-lg btn-primary" %>
+  </div>
 </div>
 
 <br />
