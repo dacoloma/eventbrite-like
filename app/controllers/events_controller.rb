@@ -31,9 +31,11 @@ class EventsController < ApplicationController
 
   def invite
     @event = Event.find(params[:event_id])
+    @user = User.find(params[:id])
+    puts @event.inspect
     @event.attendees << @user
     flash.now[:success] = "Participation with success"
-    render 'show'
+    redirect_to @event
   end
 
   def destroy

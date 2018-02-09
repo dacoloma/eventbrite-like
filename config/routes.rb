@@ -15,11 +15,12 @@ Rails.application.routes.draw do
 
   post '/subscribe', to: 'events#subscribe'
 
+
   resources :users
   resources :events do
     get '/users', to: 'users#index'
-    post '/invite', to: 'events#invite'
+    get '/users/invite', to: 'events#invite'
   end
-  
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
