@@ -4,21 +4,18 @@
       <th>Date</th>
       <th>Lieu</th>
       <th>Créateur</th>
-      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% if !@events.nil? %>
-      <% @events.past.each do |event| %>
+      <% @events.past.sort{|a,b| a.date <=> b.date}.each do |event| %>
         <tr>
           <td><%= event.date.strftime("%d-%b-%Y") %></td>
           <td><%= event.place %></td>
           <td><%= event.creator.name %></td>
           <% if logged_in? %>
-            <td><ul class="button_list_table">
-              <li><%= link_to 'Show', event, :class=>"btn btn-sm btn-info", :method=>:get%></li>
-            </ul></td>
+            <td><%= link_to 'Show', event, :class=>"btn btn-sm btn-info", :method=>:get%></td>
             <% end %>
         </tr>
       <% end %>

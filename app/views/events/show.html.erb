@@ -1,11 +1,9 @@
 <h1>Event</h1>
 <h2>Organisateur : <%= @event.creator.name %></h2>
 <h2><%= @event.place %></h2>
+<h2><%= @event.description %></h2>
 <h2><%= @event.date.strftime("%d %B %Y") %></h2>
-<h2><%= @event.id %></h2>
 <div class="center jumbotron">
-
-
   <h3>Liste des participants</h3>
   <br>
   <% if !@event.attendees.any? %>
@@ -14,7 +12,8 @@
     <table class="event-show">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>ID</th>
+          <th>Nom</th>
           <th>Email</th>
         </tr>
       </thead>
@@ -22,6 +21,7 @@
       <tbody>
         <% @event.attendees.each do |attendee| %>
           <tr>
+            <td><%= attendee.id%></td>
             <td><%= attendee.name%></td>
             <td><%= attendee.email %></td>
           </tr>
@@ -31,4 +31,35 @@
   <% end %>
 </div>
 
-<!--<div style="text-align:center;"><%= link_to "Edite tes infos", edit_user_path(current_user), class: "btn btn-lg btn-warning" %></div>-->
+<div class="center jumbotron">
+  <h3>Envoyer des invitations</h3>
+  <br>
+  <% if invitations.count == @event.attendees.reject{|user| user == current_user}.count %>
+    <div>Aucune invitation à envoyer</div>
+  <% else %>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <% invitations.each do |user| %>
+          <% unless @event.attendees.include? user %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= link_to 'Inviter', {:controller => "events", :action => "invite", :id => user.id, :event_id => @event.id}, :class=>"btn btn-sm btn-success" %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

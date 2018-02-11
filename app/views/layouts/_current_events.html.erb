@@ -1,4 +1,4 @@
-<table class="table-hover index">
+<table class="table-hover">
   <thead>
     <tr>
       <th>Date</th>
@@ -8,19 +8,21 @@
   </thead>
 
   <tbody>
-    <% @events.current.each do |event| %>
+    <% @events.current.sort{|a,b| a.date <=> b.date}.each do |event| %>
       <tr>
         <td><%= event.date.strftime("%d-%b-%Y") %></td>
         <td><%= event.place %></td>
         <td><%= event.creator.name %></td>
         <% if logged_in? %>
-          <td><ul class="button_list_table">
-            <li><%= link_to 'Show', event, :class=>"btn btn-sm btn-info", :method=>:get%></li>
-            <!--<li><%= link_to 'Edit', edit_event_path(event), :class=>"btn btn-sm btn-warning", :method=>:get%></li>-->
-            <% if !(event.attendees.include? current_user) %>
-              <li><%= link_to 'Participer',subscribe_path(id: event.id) , :class=>"btn btn-sm btn-primary", :method=>:post %></li>
+          <td class="buttons">
+            <%= link_to 'Show', event, :class=>"btn btn-sm btn-info", :method=>:get%>
+          <% if !(event.attendees.include? current_user) %>
+              <%= link_to 'Participer',subscribe_path(id: event.id) , :class=>"btn btn-sm btn-primary", :method=>:post %>
             <% end %>
-          </ul></td>
+            <% if current_user == event.creator %>
+              <%= link_to 'Invite', event_users_path(event), :class=>"btn btn-sm btn-success", :method=>:get%>
+              <%= link_to 'Delete', event, :class=>"btn btn-sm btn-danger", :method=>:delete%></td>
+              <% end %>
         <% end %>
       </tr>
     <% end %>

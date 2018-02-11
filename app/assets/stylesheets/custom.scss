@@ -4,6 +4,7 @@
 /* mixins, variables, etc. */
 html{
   min-width: 100%;
+  min-height: 100%;
 }
 $gray-medium-light: #eaeaea;
 
@@ -19,44 +20,29 @@ body {
   padding-top: 100px;
 }
 
-table{
-  width: 90%
+table {
+  width: 90%;
+  margin: auto
+}
+
+td, th{
+  width: 250px;
+  //border: 1px solid black;
 }
 
 table, th, td {
   text-align: center;
 }
 
-.button_list_table {
-  list-style: none;
-  padding: 0;
-  vertical-align: bottom;
-  li {
-    display: inline;
-    margin-right: 2px;
-    margin-left: 2px;
-  }
-}
-
-.table-hover {
-  margin: auto;
-  td {
-    width: 25%;
-  }
-}
-
-.index{
-  td {
-    width: 25%;
+.jumbotron{
+  td{
+    height: 40px;
   }
 }
 
 .event-show{
   margin: auto;
   /*border: 1px solid black;*/
-  td {
-    width: 50%;
-  }
 }
 
 section {
